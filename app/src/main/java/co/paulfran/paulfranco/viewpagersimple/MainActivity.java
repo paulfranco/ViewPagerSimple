@@ -1,5 +1,6 @@
 package co.paulfran.paulfranco.viewpagersimple;
 
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -12,6 +13,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Prepare the Data Model
+        List<DataModel> itemList = getDataList();
+
+        // Locate the View Pager in activity_main.xml
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
+
+        // Create instance of PagerAdapter
+        CustomPagerAdapter adapter = new CustomPagerAdapter(this, itemList);
+
+        // Bind the Adapter to the View Pager
+        viewPager.setAdapter(adapter);
     }
 
     public List<DataModel> getDataList() {
