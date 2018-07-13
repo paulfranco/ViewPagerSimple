@@ -3,15 +3,19 @@ package co.paulfran.paulfranco.viewpagersimple;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 public class CustomPagerAdapter extends PagerAdapter{
+
+    private static final String TAG = CustomPagerAdapter.class.getSimpleName();
 
     private Context context;
     private List<DataModel> itemList;
@@ -42,6 +46,8 @@ public class CustomPagerAdapter extends PagerAdapter{
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
 
+        Log.i(TAG, "Instatiation for position " + position + " [Item " + (position+1) + "]");
+
         // Get the View of the single View Pager Item
         View itemView = inflater.inflate(R.layout.viewpager_item, container, false);
 
@@ -63,8 +69,11 @@ public class CustomPagerAdapter extends PagerAdapter{
     }
 
     @Override
+    // Object is itemView
     public void destroyItem(ViewGroup container, int position, Object object) {
-
+        Log.i(TAG, "Destroy Item at position " + position + " [Item " + (position+1) + "]");
+        // Remove view of viewpager_item.xml from ViewPager container
+        container.removeView((FrameLayout) object);
     }
 
 
